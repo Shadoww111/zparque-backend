@@ -1,0 +1,59 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Análise de Faturação - Consumo'
+@Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define view entity ZC_CS4_FaturacaoAnalise
+  as select from ZI_CS4_FaturacaoAnalise
+{
+  key IdMovimento,
+  Matricula,
+  IdCliente,
+  ClienteNome,
+  IdTipoVeiculo,
+  TipoVeiculoDesc,
+  
+  // Dados temporais
+  DataEntrada,
+  DataSaida,
+  DuracaoHoras,
+  
+  // Campos para agrupamento
+  @Semantics.calendar.yearMonth: true
+  MesAno,
+  @Semantics.calendar.year: true
+  Ano,
+  @Semantics.calendar.month: true
+  Mes,
+  Dia,
+  SemanaDoMes,
+  Trimestre,
+  
+  // Dados financeiros
+  @Semantics.amount.currencyCode: 'Moeda'
+  ValorBruto,
+  Desconto,
+  @Semantics.amount.currencyCode: 'Moeda'
+  ValorLiquido,
+  Moeda,
+  Status,
+  
+  case
+    when ValorLiquido >= 20 then 1     // Vermelho para valores altos
+    when ValorLiquido >= 10 then 2     // Amarelo para valores médios
+    else 3                             // Verde para valores baixos
+  end as ValorCriticality,
+  
+  // Criticidade do desconto
+  case
+    when Desconto > 20 then 3         // Verde para descontos altos (bom para cliente)
+    when Desconto > 10 then 2         // Amarelo para descontos médios
+    else 1                            // Vermelho para descontos baixos
+  end as DescontoCriticality
+  
+}

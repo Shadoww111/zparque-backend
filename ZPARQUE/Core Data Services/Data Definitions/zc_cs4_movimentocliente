@@ -1,0 +1,32 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'consumo'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+@Metadata.allowExtensions: true
+define root view entity ZC_CS4_MovimentoCliente 
+  as projection on ZI_CS4_Movimento
+{
+  key IdMovimento,
+  @Search.defaultSearchElement: true
+  Matricula,
+  _Veiculo.Marca as Marca,
+  _Veiculo.Modelo as Modelo,
+  DataEntrada,
+  DataSaida,
+  DuracaoHoras,
+  @Semantics.amount.currencyCode: 'Moeda'
+  ValorBruto,
+  Desconto,
+  @Semantics.amount.currencyCode: 'Moeda'
+  ValorLiquido,
+  Moeda,
+  Status,
+  IdVeiculo,
+  /* Associations */
+  _Veiculo
+}
