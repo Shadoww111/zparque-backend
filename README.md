@@ -1,57 +1,71 @@
 # zparque-backend 🚗📦
 
-Este repositório contém a parte **backend** do projeto **ZParque**, desenvolvido no contexto de um estágio, com o objetivo de gerir um parque de estacionamento de forma eficiente e automatizada.
+Este repositório contém a parte **backend** do projeto **ZParque**, desenvolvido no contexto de um estágio. O objetivo é gerir um parque de estacionamento de forma automatizada, eficiente e escalável, com base na plataforma SAP.
 
 ## 📌 Descrição do Projeto
 
-O sistema permite o controlo e gestão de entradas e saídas de viaturas, cálculo de custos, gestão de clientes e verificação da disponibilidade de lugares, com base nas seguintes regras:
+O backend é responsável por toda a lógica de negócio e persistência de dados do sistema, incluindo:
 
-- Controlo de entradas e saídas
-- Cálculo automático do custo de estacionamento (dependente do tipo de cliente e veículo)
+- Controlo de entradas e saídas de viaturas
+- Cálculo automático do custo de estacionamento
+- Aplicação de descontos com base em tipo de cliente e veículo
 - Gestão de clientes e respetivos veículos
-- Gestão da ocupação do parque por tipo de viatura:
-  - 65 Lugares para veículos ligeiros
-  - 20 Lugares para motociclos
-  - 15 Lugares para veículos pesados
+- Gestão de ocupação do parque por tipo de viatura
 
-### Tipos de Veículos
+A lógica foi implementada em **SAP ABAP**, com exposição via **OData**, permitindo integração direta com as aplicações Fiori no frontend.
+
+## 🚗 Tipos de Veículos
+
 - Ligeiro
 - Motociclo
 - Pesado
 
-### Tipos de Cliente
-- Clientes com diferentes níveis de desconto, dependente do tipo de veículo associado
+## 👥 Tipos de Cliente
+
+- Clientes com diferentes níveis de desconto
+- Descontos aplicados por tipo de veículo associado
+
+## 🅿️ Capacidade do Parque
+
+- 65 Lugares para veículos ligeiros
+- 20 Lugares para motociclos
+- 15 Lugares para veículos pesados
 
 ## ⚙️ Tecnologias Utilizadas
 
-- **SAP ABAP** (lógica de backend)
-- Integração com **SAP Fiori** (no frontend)
-- Arquitetura orientada a objetos
+- **SAP ABAP** (lógica de negócio e persistência)
+- **OData Services** (exposição da lógica para o frontend)
+- Arquitetura orientada a objetos (OO ABAP)
 
-> Este repositório representa apenas o **backend** do sistema. A parte **frontend** será implementada em SAP Fiori (Launchpad) com várias aplicações para interação com os dados.
+## 🧩 Funcionalidades Disponíveis
 
-## 🧩 Funcionalidades Backend
+- 📥 **Entrada de Viatura**
+  - Validação de cliente
+  - Alocação automática do lugar
+- 📤 **Saída de Viatura**
+  - Cálculo do tempo de estadia e custo final
+  - Aplicação de descontos
+- 👤 **Gestão de Clientes**
+  - Dados pessoais e veículos associados
+  - Diferenciação por tipo de cliente
+- 🅿️ **Gestão de Ocupação**
+  - Controlo de lugares disponíveis por tipo
+- 💰 **Gestão de Faturação**
+  - Cálculo detalhado por tipo de viatura e cliente
 
-- 📥 Registo de entrada de viaturas
-- 📤 Registo de saída e cálculo do custo de estadia
-- 👤 Gestão de clientes e veículos
-- 🅿️ Gestão de disponibilidade de lugares por tipo de veículo
-- 💰 Aplicação de descontos com base no tipo de cliente e veículo
-- 📊 Geração de dados para relatórios de faturação (para visualização no frontend)
+## 🚧 Funcionalidades Planeadas (Bónus)
 
-## 📁 Estrutura do Projeto
+- 📄 Geração de fatura em PDF no momento da saída
+- 🗺️ Visualização de mapa do parque (lugares ocupados/livres)
+- 🔌 Gestão de lugares com carregador elétrico (custo por consumo de energia)
 
-A estrutura do projeto segue boas práticas de organização no desenvolvimento em ABAP, com separação de responsabilidades e modularidade no código.
+## 🖇️ Integração com o Frontend
 
-## 🚧 Funcionalidades Bónus Planeadas (se houver tempo)
-
-- Geração de fatura em PDF no momento da saída
-- Visualização de mapa do parque com lugares ocupados e livres
-- Gestão de lugares com carregador elétrico (incluindo cálculo de consumo de energia)
+Este backend comunica com as aplicações SAP Fiori presentes no repositório [zparque-frontend](https://github.com/Shadoww111/zparque-frontend), através de serviços OData personalizados.
 
 ## 📄 Licença
 
-Este projeto é apenas para fins educativos e de demonstração no contexto de estágio.
+Este projeto foi desenvolvido no âmbito de um estágio curricular e destina-se a fins educativos e demonstrativos.
 
 ---
 
